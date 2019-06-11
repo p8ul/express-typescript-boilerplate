@@ -13,9 +13,9 @@ This is a simple Node.js, Express, MongoDB and Typescript boilerplate
 `git clone https://github.com/p8ul/express-typescript-boilerplate.git`
 
 ### Install dependencies
-`bash yarn install`
+`yarn install`
 
 ### Start the Server
-`bash yarn start`
+`yarn start`
 This will start the server at `http://localhost:3000`
 
