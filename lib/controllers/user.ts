@@ -11,14 +11,14 @@ export class UserController {
 
         newUser.save((err, user) => {
             if (err) {
-                res.send(err);
+                return res.send(err);
             } 
             res.status(201).json({token: generateToken(user)});
         });
     }
 
     public getUsers (req: Request, res: Response) {
-        User.find({}, (err, users) => {
+        User.find({},{password: 0}, (err, users) => {
             if (err) {
                 res.send(err);
             }
@@ -33,6 +33,20 @@ export class UserController {
             }
             res.json(user);
         });
+    }
+
+    public login (req: Request, res: Response) {
+        User.findOne({email: req.body.email}, (err, user) => {
+            if (err || !user) return res.status(404).json({message: 'User not found!'});
+                
+            user.comparePassword(req.body.password.toString(), (error, isMatch) => {
+                if (error) return res.status(404).json({message: 'Email or password do not match!'});
+                if (isMatch) return res.status(201).json({token: generateToken(user)});
+            
+                return res.status(404).json({message: 'Email or password do not match!'});
+                
+            });
+        })
     }
 
     public updateUser (req: Request, res: Response) {

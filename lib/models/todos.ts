@@ -10,5 +10,17 @@ export const TodoSchema = new Schema({
     note: {
         type: String,
         required: 'Enter a note',
+    },
+    status: {
+        type: String,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
+});
+
+
+TodoSchema.virtual('name').get(function () {
+    return this._id + ' ' + this.title;
 });

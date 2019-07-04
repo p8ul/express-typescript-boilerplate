@@ -1,4 +1,5 @@
-import { UserController } from '../controllers/user';
+import { UserController } from '../../controllers/user';
+import { userExistValidator } from './validator';
 
 export class UserRoutes {
     public userController: UserController = new UserController();
@@ -11,7 +12,7 @@ export class UserRoutes {
         .get(this.userController.getUsers)
 
         // POST endpoint
-        .post(this.userController.addNewUser);
+        .post([userExistValidator], this.userController.addNewUser);
 
         // todo detail
         app.route('/user/:userId')
@@ -19,5 +20,7 @@ export class UserRoutes {
         .get(this.userController.getUserWithId)
         .put(this.userController.updateUser)
         .delete(this.userController.deleteUser)
+
+        app.route('/login').post(this.userController.login)
     }
 }

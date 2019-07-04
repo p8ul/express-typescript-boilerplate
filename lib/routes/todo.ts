@@ -1,4 +1,5 @@
 import { TodoController } from '../controllers/todo';
+import authenticate from '../utils/auth';
 
 export class TodoRoutes {
     public todoController: TodoController = new TodoController();
@@ -11,12 +12,12 @@ export class TodoRoutes {
         .get(this.todoController.getTodos)
 
         // POST endpoint
-        .post(this.todoController.addNewTodo);
+        .post([authenticate], this.todoController.addNewTodo);
 
         // todo detail
         app.route('/todo/:todoId')
         // get specific todo
-        .get(this.todoController.getTodoWithId)
+        .get(this.todoController.getTodo)
         .put(this.todoController.updateTodo)
         .delete(this.todoController.deleteTodo)
     }

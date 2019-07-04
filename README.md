@@ -5,7 +5,7 @@ This is a simple Node.js, Express, MongoDB and Typescript boilerplate
 
 ## Requirements
     - NodeJs
-    - Typescript and Typescript Node `bash npm install -g typescript ts-node`
+    - Typescript and Typescript Node `npm install -g typescript ts-node`
     - MongoDB
 
 ## Getting Started
